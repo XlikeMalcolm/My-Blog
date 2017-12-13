@@ -1,0 +1,44 @@
+
+
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: "col-sm-2 control-label" %>
+    <%= form.text_field :name, id: :post_name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title, class: "col-sm-2 control-label" %>
+    <%= form.text_field :title, id: :post_title, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body, class: "col-sm-2 control-label" %>
+    <%= form.text_area :body, id: :post_body, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image, class: "col-sm-2 control-label" %>
+    <%= form.file_field :image, id: :post_image, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id, class: "col-sm-2 control-label" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, class: "btn btn-info dropdown-toggle" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

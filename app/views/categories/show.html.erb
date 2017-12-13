@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+          <h1 class="my-4"><%= @category.name %>
+            <% if current_user %>
+            <small><%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %></small>
+            <% end %>
+          </h1>
+<hr>
+<% if current_user %>
+          <%= link_to 'New Post', new_post_path %>
+<hr>
+<% end %>
+
+          <!-- Blog Post -->
+          <% @posts.each do |post| %>
+          <div class="card mb-4">
+            <%= image_tag post.image, class: "card-img-top" %>
+            <div class="card-body">
+              <h2 class="card-title"><%= post.title %></h2>
+              <p class="card-text"><%= post.body %></p>
+              <%= link_to "Read More", post, class: "btn btn-primary" %>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on <%= post.created_at.to_s(:long) %> by
+              <%= link_to post.name, "#" %>
+            </div>
+            <% if current_user %>
+            <div class="card-footer text-muted">
+              <table>
+                  <tr>
+                    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+                    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+              </table>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+
+           <!-- Pagination -->
+          <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+              <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+          </ul>
+
+        
+
+
+
+
+  
